@@ -24,7 +24,7 @@ fun HomeScreen(
     onNavigateToImport: () -> Unit,
     onNavigateToDashboard: (Long) -> Unit,
     onNavigateToSettings: () -> Unit,
-    onNavigateToBilling: () -> Unit,
+    onNavigateToPaywall: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -34,7 +34,7 @@ fun HomeScreen(
         when (val event = navigationEvent) {
             is HomeViewModel.NavigationEvent.NavigateToImport -> onNavigateToImport()
             is HomeViewModel.NavigationEvent.NavigateToDashboard -> onNavigateToDashboard(event.sessionId)
-            is HomeViewModel.NavigationEvent.NavigateToBilling -> onNavigateToBilling()
+            is HomeViewModel.NavigationEvent.NavigateToBilling -> onNavigateToPaywall()
             null -> {}
         }
         if (navigationEvent != null) {

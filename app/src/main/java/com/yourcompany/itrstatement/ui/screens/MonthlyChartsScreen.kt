@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.yourcompany.itrstatement.ui.components.MonthlyBarChart
+import com.yourcompany.itrstatement.ui.components.createMonthData
 import com.yourcompany.itrstatement.ui.viewmodel.DashboardViewModel
 import com.yourcompany.itrstatement.utils.CurrencyFormatter
 
@@ -105,8 +106,8 @@ private fun MonthlyChartsContent(
                         )
                         Spacer(modifier = Modifier.height(16.dp))
                         MonthlyBarChart(
-                            data = monthlyTrends.map { trend ->
-                                Triple(trend.monthYear, trend.income, trend.expense)
+                            monthlyData = monthlyTrends.map { trend ->
+                                createMonthData(trend.monthYear, trend.income, trend.expense)
                             },
                             modifier = Modifier
                                 .fillMaxWidth()

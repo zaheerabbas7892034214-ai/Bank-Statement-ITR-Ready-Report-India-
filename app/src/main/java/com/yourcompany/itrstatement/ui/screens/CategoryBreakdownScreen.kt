@@ -20,7 +20,7 @@ import com.yourcompany.itrstatement.utils.CurrencyFormatter
 fun CategoryBreakdownScreen(
     viewModel: DashboardViewModel,
     sessionId: Long? = null,
-    onNavigateToTransactionList: (String) -> Unit,
+    onNavigateToTransactions: (String) -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -61,7 +61,7 @@ fun CategoryBreakdownScreen(
                     categoryBreakdown = state.categoryBreakdown,
                     totalExpense = state.totalExpense,
                     onCategoryClick = { category ->
-                        onNavigateToTransactionList(category.name)
+                        onNavigateToTransactions(category.name)
                     },
                     modifier = Modifier.padding(paddingValues)
                 )
@@ -110,8 +110,8 @@ private fun CategoryBreakdownContent(
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         CategoryPieChart(
-                            data = categoryBreakdown.map { summary ->
-                                Pair(summary.category.displayName, summary.amount.toFloat())
+                            categoryAmounts = categoryBreakdown.associate { summary ->
+                                summary.category to summary.amount
                             },
                             modifier = Modifier
                                 .fillMaxWidth()

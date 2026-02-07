@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.yourcompany.itrstatement.ui.components.MonthlyBarChart
+import com.yourcompany.itrstatement.ui.components.createMonthData
 import com.yourcompany.itrstatement.ui.viewmodel.DashboardViewModel
 import com.yourcompany.itrstatement.utils.CurrencyFormatter
 import com.yourcompany.itrstatement.utils.DateUtils
@@ -21,8 +22,8 @@ fun DashboardScreen(
     viewModel: DashboardViewModel,
     sessionId: Long? = null,
     onNavigateToTransactions: () -> Unit,
-    onNavigateToCategoryBreakdown: () -> Unit,
-    onNavigateToMonthlyCharts: () -> Unit,
+    onNavigateToCategories: () -> Unit,
+    onNavigateToCharts: () -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -71,8 +72,8 @@ fun DashboardScreen(
                 DashboardContent(
                     state = state,
                     onNavigateToTransactions = onNavigateToTransactions,
-                    onNavigateToCategoryBreakdown = onNavigateToCategoryBreakdown,
-                    onNavigateToMonthlyCharts = onNavigateToMonthlyCharts,
+                    onNavigateToCategories = onNavigateToCategories,
+                    onNavigateToCharts = onNavigateToCharts,
                     modifier = Modifier.padding(paddingValues)
                 )
             }
@@ -96,8 +97,8 @@ fun DashboardScreen(
 private fun DashboardContent(
     state: DashboardViewModel.UiState.Success,
     onNavigateToTransactions: () -> Unit,
-    onNavigateToCategoryBreakdown: () -> Unit,
-    onNavigateToMonthlyCharts: () -> Unit,
+    onNavigateToCategories: () -> Unit,
+    onNavigateToCharts: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -132,7 +133,7 @@ private fun DashboardContent(
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold
                 )
-                TextButton(onClick = onNavigateToMonthlyCharts) {
+                TextButton(onClick = onNavigateToCharts) {
                     Text("View All")
                     Icon(
                         Icons.Default.ChevronRight,
@@ -147,8 +148,8 @@ private fun DashboardContent(
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     MonthlyBarChart(
-                        data = state.monthlyTrends.map { trend ->
-                            Triple(trend.monthYear, trend.income, trend.expense)
+                        monthlyData = state.monthlyTrends.map { trend ->
+                            createMonthData(trend.monthYear, trend.income, trend.expense)
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -173,7 +174,7 @@ private fun DashboardContent(
                 totalSavings = state.totalSavings,
                 transactionCount = state.transactions.size,
                 onNavigateToTransactions = onNavigateToTransactions,
-                onNavigateToCategoryBreakdown = onNavigateToCategoryBreakdown
+                onNavigateToCategories = onNavigateToCategories
             )
         }
     }
@@ -258,7 +259,7 @@ private fun QuickStatsSection(
     totalSavings: Double,
     transactionCount: Int,
     onNavigateToTransactions: () -> Unit,
-    onNavigateToCategoryBreakdown: () -> Unit,
+    onNavigateToCategories: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -275,7 +276,7 @@ private fun QuickStatsSection(
             title = "Category Breakdown",
             value = "View Details",
             icon = Icons.Default.PieChart,
-            onClick = onNavigateToCategoryBreakdown
+            onClick = onNavigateToCategories
         )
     }
 }
