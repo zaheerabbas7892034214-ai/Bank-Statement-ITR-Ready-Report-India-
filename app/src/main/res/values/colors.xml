@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="primary">#1976D2</color>
+    <color name="primary_dark">#004BA0</color>
+    <color name="primary_light">#63A4FF</color>
+    
+    <!-- Secondary Colors -->
+    <color name="secondary">#4CAF50</color>
+    <color name="secondary_dark">#087F23</color>
+    <color name="secondary_light">#80E27E</color>
+    
+    <!-- Background Colors -->
+    <color name="background_light">#FAFAFA</color>
+    <color name="background_dark">#121212</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_dark">#1E1E1E</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="error">#E53935</color>
+    <color name="warning">#FFA726</color>
+    <color name="info">#29B6F6</color>
+    
+    <!-- Pro Badge -->
+    <color name="pro_gold">#FFD700</color>
+    
+    <!-- Common -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>
