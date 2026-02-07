@@ -21,10 +21,17 @@ import com.yourcompany.itrstatement.ui.viewmodel.BillingViewModel
 fun PaywallScreen(
     viewModel: BillingViewModel,
     onNavigateBack: () -> Unit,
+    onSubscriptionSuccess: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
+
+    LaunchedEffect(uiState) {
+        if (uiState is BillingViewModel.UiState.Purchased) {
+            onSubscriptionSuccess()
+        }
+    }
 
     Scaffold(
         topBar = {

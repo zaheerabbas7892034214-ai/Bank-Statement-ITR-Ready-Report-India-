@@ -19,6 +19,7 @@ import com.yourcompany.itrstatement.utils.DateUtils
 fun SettingsScreen(
     billingViewModel: BillingViewModel,
     onNavigateBack: () -> Unit,
+    onNavigateToPaywall: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val billingState by billingViewModel.uiState.collectAsState()
@@ -39,6 +40,7 @@ fun SettingsScreen(
         SettingsContent(
             billingState = billingState,
             onRestorePurchases = { billingViewModel.restorePurchases() },
+            onNavigateToPaywall = onNavigateToPaywall,
             modifier = Modifier.padding(paddingValues)
         )
     }
@@ -48,6 +50,7 @@ fun SettingsScreen(
 private fun SettingsContent(
     billingState: BillingViewModel.UiState,
     onRestorePurchases: () -> Unit,
+    onNavigateToPaywall: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -69,7 +72,8 @@ private fun SettingsContent(
                 is BillingViewModel.UiState.Ready -> {
                     SubscriptionStatusCard(
                         isSubscribed = billingState.isSubscribed,
-                        subscriptionDetails = billingState.subscriptionDetails
+                        subscriptionDetails = billingState.subscriptionDetails,
+                        onUpgradeClick = if (!billingState.isSubscribed) onNavigateToPaywall else null
                     )
                 }
                 is BillingViewModel.UiState.Loading -> {
@@ -224,6 +228,7 @@ private fun SettingsContent(
 private fun SubscriptionStatusCard(
     isSubscribed: Boolean,
     subscriptionDetails: BillingViewModel.SubscriptionDetails?,
+    onUpgradeClick: (() -> Unit)?,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -311,6 +316,15 @@ private fun SubscriptionStatusCard(
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                }
+            }
+            
+            if (!isSubscribed && onUpgradeClick != null) {
+                Button(
+                    onClick = onUpgradeClick,
+                    modifier = Modifier.padding(start = 8.dp)
+                ) {
+                    Text("Upgrade")
                 }
             }
         }

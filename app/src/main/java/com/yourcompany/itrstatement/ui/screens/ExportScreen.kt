@@ -27,6 +27,7 @@ import com.yourcompany.itrstatement.utils.DateUtils
 @Composable
 fun ExportScreen(
     viewModel: ExportViewModel,
+    sessionId: Long? = null,
     onNavigateBack: () -> Unit,
     onNavigateToPaywall: () -> Unit,
     modifier: Modifier = Modifier
@@ -35,6 +36,12 @@ fun ExportScreen(
     val previewState by viewModel.previewState.collectAsState()
     val context = LocalContext.current
     var selectedFormat by remember { mutableStateOf<ExportDataUseCase.ExportFormat?>(null) }
+
+    LaunchedEffect(sessionId) {
+        if (sessionId != null) {
+            viewModel.loadSessionData(sessionId)
+        }
+    }
 
     val createDocumentLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("*/*")

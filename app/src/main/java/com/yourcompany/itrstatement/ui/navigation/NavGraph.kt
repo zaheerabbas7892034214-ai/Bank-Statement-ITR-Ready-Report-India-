@@ -193,7 +193,9 @@ fun NavGraph(
         }
 
         composable(Screen.Settings.route) {
+            val viewModel: BillingViewModel = viewModel()
             SettingsScreen(
+                billingViewModel = viewModel,
                 onNavigateBack = {
                     navController.popBackStack()
                 },

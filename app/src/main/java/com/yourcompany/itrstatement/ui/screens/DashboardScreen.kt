@@ -24,6 +24,7 @@ fun DashboardScreen(
     onNavigateToTransactions: () -> Unit,
     onNavigateToCategories: () -> Unit,
     onNavigateToCharts: () -> Unit,
+    onNavigateToExport: () -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
