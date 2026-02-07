@@ -110,7 +110,7 @@ class ExportDataUseCase(
                 ExportFormat.CSV -> "csv"
                 ExportFormat.EXCEL -> "xlsx"
                 ExportFormat.JSON -> "json"
-                ExportFormat.PDF -> "txt"
+                ExportFormat.PDF -> "txt"  // Text-based report format
             }
             
             val fullFileName = if (fileName.endsWith(".$extension")) {
@@ -179,7 +179,7 @@ class ExportDataUseCase(
             ExportFormat.CSV -> "CSV (Comma Separated Values) - Compatible with Excel, Google Sheets"
             ExportFormat.EXCEL -> "Excel (XLSX) - Professional report with multiple sheets [PRO]"
             ExportFormat.JSON -> "JSON - Structured data format for developers [PRO]"
-            ExportFormat.PDF -> "PDF Report - ITR-ready formatted report [PRO]"
+            ExportFormat.PDF -> "Text Report - ITR-ready formatted text report [PRO]"
         }
     }
     
@@ -188,7 +188,7 @@ class ExportDataUseCase(
             ExportFormat.CSV -> "csv"
             ExportFormat.EXCEL -> "xlsx"
             ExportFormat.JSON -> "json"
-            ExportFormat.PDF -> "txt"
+            ExportFormat.PDF -> "txt"  // Text-based report format
         }
     }
 }
