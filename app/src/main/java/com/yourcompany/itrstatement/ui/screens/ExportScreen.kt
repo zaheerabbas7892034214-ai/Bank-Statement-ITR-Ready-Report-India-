@@ -37,12 +37,6 @@ fun ExportScreen(
     val context = LocalContext.current
     var selectedFormat by remember { mutableStateOf<ExportDataUseCase.ExportFormat?>(null) }
 
-    LaunchedEffect(sessionId) {
-        if (sessionId != null) {
-            viewModel.loadSessionData(sessionId)
-        }
-    }
-
     val createDocumentLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("*/*")
     ) { uri: Uri? ->

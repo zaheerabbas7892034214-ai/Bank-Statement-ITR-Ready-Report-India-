@@ -28,7 +28,7 @@ fun PaywallScreen(
     val context = LocalContext.current
 
     LaunchedEffect(uiState) {
-        if (uiState is BillingViewModel.UiState.Purchased) {
+        if (uiState is BillingViewModel.UiState.PurchaseSuccess) {
             onSubscriptionSuccess()
         }
     }
