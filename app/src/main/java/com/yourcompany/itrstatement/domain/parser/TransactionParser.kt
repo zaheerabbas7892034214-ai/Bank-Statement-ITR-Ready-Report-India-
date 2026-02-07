@@ -193,12 +193,12 @@ class TransactionParser {
             if (trimmed.isEmpty()) continue
             
             if (!headerFound) {
-                val lower = trimmed.toLowerCase(Locale.getDefault())
+                val lower = trimmed.lowercase()
                 if (lower.contains("date") || lower.contains("particulars") || lower.contains("description")) {
                     val parts = trimmed.split(Regex("\\s{2,}|\\t|\\|"))
                     
                     parts.forEachIndexed { index, part ->
-                        val partLower = part.toLowerCase(Locale.getDefault())
+                        val partLower = part.lowercase()
                         when {
                             partLower.contains("date") -> dateColumnIndex = index
                             partLower.contains("particular") || partLower.contains("description") || partLower.contains("narration") -> descColumnIndex = index

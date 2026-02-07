@@ -58,7 +58,7 @@ class TransactionCategorizer {
     )
     
     fun categorize(transaction: Transaction): Transaction {
-        val description = transaction.description.toLowerCase(Locale.getDefault())
+        val description = transaction.description.lowercase()
         
         val category = findCategory(description) ?: determineFromAmount(transaction)
         
@@ -131,7 +131,7 @@ class TransactionCategorizer {
     }
     
     fun suggestCategory(description: String): Category {
-        val lower = description.toLowerCase(Locale.getDefault())
+        val lower = description.lowercase()
         return findCategory(lower) ?: Category.UNCATEGORIZED
     }
     

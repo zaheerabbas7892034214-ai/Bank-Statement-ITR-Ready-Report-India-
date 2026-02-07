@@ -115,7 +115,7 @@ class MergeImportsUseCase {
     private fun normalizeDescription(description: String): String {
         return description
             .trim()
-            .toLowerCase()
+            .lowercase()
             .replace(Regex("\\s+"), " ")
             .replace(Regex("[^a-z0-9\\s]"), "")
     }
